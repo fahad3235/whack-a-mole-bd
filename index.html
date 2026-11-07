@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whack-a-Mole BD</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1 id="appTitle">Whack-a-Mole BD</h1>
+    <p id="appSubtitle" class="subtitle">Catch the moles, dodge the bombs!</p>
+  </div>
+  <div class="top-actions">
+    <button id="soundBtn" class="chip-btn" type="button" aria-label="Toggle sound">Sound on</button>
+    <button id="langBtn" class="chip-btn" type="button">Bangla</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Setup screen -->
+  <section id="setupScreen" class="card">
+    <h2 id="setupTitle">Set up your game</h2>
+
+    <p class="field-label" id="modeLabel">Game mode</p>
+    <div class="seg" id="modeSeg" role="group" aria-label="Game mode">
+      <button type="button" class="seg-btn" data-mode="blitz" id="modeBlitz">Blitz - 30 seconds</button>
+      <button type="button" class="seg-btn active" data-mode="classic" id="modeClassic">Classic - 60 seconds</button>
+      <button type="button" class="seg-btn" data-mode="endless" id="modeEndless">Endless - 3 lives</button>
+    </div>
+
+    <p class="field-label" id="diffLabel">Difficulty</p>
+    <div class="seg" id="diffSeg" role="group" aria-label="Difficulty">
+      <button type="button" class="seg-btn" data-diff="easy" id="diffEasy">Easy</button>
+      <button type="button" class="seg-btn active" data-diff="normal" id="diffNormal">Normal</button>
+      <button type="button" class="seg-btn" data-diff="hard" id="diffHard">Hard</button>
+    </div>
+
+    <p class="mode-best"><span id="modeBest">Best in this mode</span>: <strong id="modeBestValue">0</strong></p>
+
+    <button id="startBtn" class="primary-btn" type="button">Start game</button>
+
+    <details class="howto">
+      <summary id="howTitle">How to play</summary>
+      <ol>
+        <li id="how1">Moles pop out of the holes - tap one to whack it.</li>
+        <li id="how2">Normal mole: +10 points. Golden mole: +50 points, but it is quick!</li>
+        <li id="how3">Never whack a bomb: -25 points and your combo breaks.</li>
+        <li id="how4">Consecutive hits build a combo multiplier up to x5.</li>
+        <li id="how5">In Endless mode you have 3 lives - a mole that escapes or a bomb costs one life.</li>
+      </ol>
+    </details>
+  </section>
+
+  <!-- Game screen -->
+  <section id="gameScreen" class="card hidden">
+    <div class="hud">
+      <div class="hud-item"><span class="hud-label" id="scoreLabel">Score</span><strong id="scoreValue">0</strong></div>
+      <div class="hud-item"><span class="hud-label" id="timeLabel">Time</span><strong id="timeValue">60s</strong></div>
+      <div class="hud-item"><span class="hud-label" id="livesLabel">Lives</span><strong id="livesValue">-</strong></div>
+      <div class="hud-item"><span class="hud-label" id="comboLabel">Combo</span><strong id="comboValue">x1</strong></div>
+      <div class="hud-item"><span class="hud-label" id="bestLabel">Best</span><strong id="bestValue">0</strong></div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <div id="board" class="board" role="group" aria-label="Mole board">
+      <!-- 9 holes are rendered by app.js -->
+    </div>
+
+    <div class="game-actions">
+      <button id="pauseBtn" class="secondary-btn" type="button">Pause</button>
+      <button id="quitBtn" class="secondary-btn" type="button">Quit</button>
+    </div>
+
+    <div id="countdownOverlay" class="overlay hidden"><span id="countdownNum">3</span></div>
+    <div id="pauseOverlay" class="overlay hidden">
+      <div class="overlay-box">
+        <h3 id="pausedTitle">Paused</h3>
+        <p id="pausedText">Take a breath - the moles are waiting.</p>
+        <button id="resumeBtn" class="primary-btn" type="button">Resume</button>
+      </div>
+    </div>
+    <div id="gameOverOverlay" class="overlay hidden">
+      <div class="overlay-box">
+        <h3 id="gameOverTitle">Time's up!</h3>
+        <p id="newBestBadge" class="new-best hidden">New best score!</p>
+        <dl class="stats">
+          <div><dt id="scoreLabel2">Score</dt><dd id="finalScore">0</dd></div>
+          <div><dt id="hitsLabel">Hits</dt><dd id="finalHits">0</dd></div>
+          <div><dt id="missesLabel">Misses</dt><dd id="finalMisses">0</dd></div>
+          <div><dt id="escapedLabel">Escaped</dt><dd id="finalEscaped">0</dd></div>
+          <div><dt id="bombsLabel">Bombs hit</dt><dd id="finalBombs">0</dd></div>
+          <div><dt id="maxComboLabel">Best combo</dt><dd id="finalCombo">x1</dd></div>
+          <div><dt id="accuracyLabel">Accuracy</dt><dd id="finalAccuracy">0%</dd></div>
+        </dl>
+        <div class="overlay-actions">
+          <button id="playAgainBtn" class="primary-btn" type="button">Play again</button>
+          <button id="changeSetupBtn" class="secondary-btn" type="button">Change setup</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="card">
+    <div class="history-head">
+      <h2 id="historyTitle">Recent games</h2>
+      <button id="historyClear" class="chip-btn" type="button">Clear history</button>
+    </div>
+    <p id="historyEmpty" class="muted">No games yet - your recent results will appear here.</p>
+    <ul id="historyList" class="history-list"></ul>
+  </section>
+</main>
+
+<footer class="footer">
+  <p id="footerNote">Offline toy game. Scores are stored only in your browser. No moles were harmed - they just go back underground.</p>
+</footer>
+
+<script src="js/logic.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
