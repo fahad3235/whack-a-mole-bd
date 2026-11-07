@@ -1,4 +1,4 @@
-# Whack-a-Mole BD - test results (factory run #260, 2026-11-07 13:00 slot)
+# Whack-a-Mole BD - test results (factory run #262, 2026-11-07 13:00 slot)
 
 ## Unit tests - 18/18 PASS
 `node --test tests/unit.test.js`

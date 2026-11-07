@@ -87,7 +87,7 @@ The smoke suite drives the real page in headless Chrome (raw CDP): rendering, la
 
 ## Status
 
-Factory run #260 (2026-11-07, 13:00 slot). Complete and verified: 18/18 unit tests + 57/57 smoke checks green, published and live on GitHub Pages.
+Factory run #262 (2026-11-07, 13:00 slot). Complete and verified: 18/18 unit tests + 57/57 smoke checks green, published and live on GitHub Pages.
 
 ## License
 
